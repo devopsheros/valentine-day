@@ -1,3 +1,4 @@
+// Envelope opens and shows the question container
 function openEnvelope() {
     const envelopeWrapper = document.getElementById('envelopeWrapper');
     const envelope = document.getElementById('envelope');
@@ -9,25 +10,34 @@ function openEnvelope() {
         envelopeWrapper.style.display = 'none';
         container.style.display = 'block';
         container.classList.add('fade-in');
-        container.style.transform = 'scale(0.7)'; // smaller
+        container.style.transform = 'scale(0.7)'; // smaller envelope container
     }, 800);
 }
 
+// Move "No" button within screen limits
 function moveButton() {
     const noBtn = document.getElementById('noBtn');
-    const maxX = window.innerWidth - noBtn.offsetWidth - 50;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 50;
 
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    // Maximum X and Y positions (keep button inside screen)
+    const maxX = window.innerWidth - btnWidth - 20; // 20px margin from right
+    const maxY = window.innerHeight - btnHeight - 20; // 20px margin from bottom
+
+    // Random position within limits
     let randomX = Math.random() * maxX;
     let randomY = Math.random() * maxY;
 
-    randomX = Math.max(20, Math.min(randomX, maxX));
-    randomY = Math.max(80, Math.min(randomY, maxY));
+    // Ensure minimum distance from edges
+    randomX = Math.max(20, randomX); // 20px margin from left
+    randomY = Math.max(20, randomY); // 20px margin from top
 
     noBtn.style.position = 'fixed';
     noBtn.style.left = randomX + 'px';
     noBtn.style.top = randomY + 'px';
 
+    // Optional: shrink button size each time
     const currentSize = parseFloat(window.getComputedStyle(noBtn).fontSize);
     if (currentSize > 12) {
         noBtn.style.fontSize = (currentSize - 1) + 'px';
@@ -35,19 +45,18 @@ function moveButton() {
     }
 }
 
+// Show celebration container and animated hearts
 function showCelebration() {
     const container = document.getElementById('container');
     const celebration = document.getElementById('celebration');
 
-    container.style.display = 'none';
-    celebration.style.display = 'block';
-
-    createHearts();
+    container.style.display = 'none';      // hide question
+    celebration.style.display = 'block';   // show celebration
+    createHearts();                        // start animated hearts
 }
 
-// Animated hearts in celebration
+// Animated hearts rising up
 function createHearts() {
-    const colors = ['#ff6b9d', '#c06c84', '#ff1493', '#ff69b4', '#ff85b3'];
     const heartsContainer = document.querySelector('.celebration-container .hearts');
 
     function createHeart() {
@@ -61,7 +70,7 @@ function createHearts() {
         heart.style.pointerEvents = 'none';
         heartsContainer.appendChild(heart);
 
-        const duration = Math.random() * 2 + 2; // faster
+        const duration = Math.random() * 2 + 2; // faster hearts
 
         const animation = heart.animate([
             { transform: 'translateY(0)', opacity: heart.style.opacity },
