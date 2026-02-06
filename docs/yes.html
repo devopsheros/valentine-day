@@ -11,46 +11,41 @@
         <h1 class="celebration-text">Yaaaay! 🎉💕</h1>
         <h2 class="subtitle">I knew you'd say yes! 😊</h2>
 
-        <!-- Container for animated hearts -->
-        <div class="hearts" id="heartsContainer"></div>
+        <div class="hearts"></div>
 
         <p class="date-text">See you on Valentine's Day! 💝</p>
     </div>
 
     <script>
-        function createHearts() {
-            const container = document.getElementById('heartsContainer');
-            const colors = ['#ff6b9d', '#c06c84', '#ff69b4', '#ff1493', '#ffd700'];
+        // Create animated hearts going up
+        const colors = ['#ff6b9d', '#c06c84', '#ff1493', '#ff69b4', '#ff85b3'];
+        const heartsContainer = document.querySelector('.hearts');
 
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                
-                const size = 10 + Math.random() * 20;
-                heart.style.width = size + 'px';
-                heart.style.height = size + 'px';
-                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                heart.style.setProperty('--heart-size', size + 'px');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerText = '❤️';
+            heart.style.position = 'absolute';
+            heart.style.fontSize = (Math.random() * 30 + 10) + 'px';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.bottom = '-50px';
+            heart.style.opacity = Math.random();
+            heart.style.pointerEvents = 'none';
+            heartsContainer.appendChild(heart);
 
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.bottom = '-20px';
-                
-                container.appendChild(heart);
+            const duration = Math.random() * 2 + 2; // faster than before
 
-                const duration = 2000 + Math.random() * 1500; // faster hearts
-                heart.animate([
-                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                    { transform: `translateY(-120vh) rotate(360deg)`, opacity: 0 }
-                ], {
-                    duration: duration,
-                    easing: 'linear'
-                });
+            const animation = heart.animate([
+                { transform: 'translateY(0)', opacity: heart.style.opacity },
+                { transform: `translateY(-${window.innerHeight + 50}px)`, opacity: 0 }
+            ], {
+                duration: duration * 1000,
+                easing: 'linear'
+            });
 
-                setTimeout(() => heart.remove(), duration);
-            }, 300); // new heart every 0.3s
+            animation.onfinish = () => heart.remove();
         }
 
-        createHearts();
+        setInterval(createHeart, 200);
     </script>
 </body>
 </html>
