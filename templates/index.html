@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will you be my Valentine? 💕</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">
+                <p class="envelope-text">Click to open 💕</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="container" style="display: none;">
+        <h1 class="question">Will you be my Valentine? 💝</h1>
+        
+        <div class="buttons-container">
+            <button class="yes-btn" onclick="sayYes()">Yes! 💕</button>
+            <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

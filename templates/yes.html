@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay! 💕</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='yes-style.css') }}">
+</head>
+<body>
+    <div class="celebration-container">
+        <h1 class="celebration-text">Yaaaay! 🎉💕</h1>
+        <h2 class="subtitle">I knew you'd say yes! 😊</h2>
+
+        <!-- Container for animated hearts -->
+        <div class="hearts" id="heartsContainer"></div>
+
+        <p class="date-text">See you on Valentine's Day! 💝</p>
+    </div>
+
+    <script>
+        function createHearts() {
+            const container = document.getElementById('heartsContainer');
+            const colors = ['#ff6b9d', '#c06c84', '#ff69b4', '#ff1493', '#ffd700'];
+
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                const size = 10 + Math.random() * 20;
+                heart.style.width = size + 'px';
+                heart.style.height = size + 'px';
+                heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.setProperty('--heart-size', size + 'px');
+
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.bottom = '-20px';
+                
+                container.appendChild(heart);
+
+                const duration = 2000 + Math.random() * 1500; // faster hearts
+                heart.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(-120vh) rotate(360deg)`, opacity: 0 }
+                ], {
+                    duration: duration,
+                    easing: 'linear'
+                });
+
+                setTimeout(() => heart.remove(), duration);
+            }, 300); // new heart every 0.3s
+        }
+
+        createHearts();
+    </script>
+</body>
+</html>
