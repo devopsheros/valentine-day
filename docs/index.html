@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
+    <!-- Envelope -->
     <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
         <div class="envelope" id="envelope">
             <div class="envelope-flap"></div>
@@ -16,13 +17,24 @@
         </div>
     </div>
 
+    <!-- Question container -->
     <div class="container" id="container" style="display: none;">
         <h1 class="question">Will you be my Valentine? 💝</h1>
 
         <div class="buttons-container">
-            <button class="yes-btn" onclick="sayYes()">Yes! 💕</button>
+            <button class="yes-btn" onclick="showCelebration()">Yes! 💕</button>
             <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
         </div>
+    </div>
+
+    <!-- Celebration container -->
+    <div class="celebration-container" id="celebration" style="display: none;">
+        <h1 class="celebration-text">Yaaaay! 🎉💕</h1>
+        <h2 class="subtitle">I knew you'd say yes! 😊</h2>
+
+        <div class="hearts"></div>
+
+        <p class="date-text">See you on Valentine's Day! 💝</p>
     </div>
 
     <script src="static/script.js"></script>
